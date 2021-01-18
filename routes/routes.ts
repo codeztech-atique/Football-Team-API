@@ -1,16 +1,15 @@
+import { createTheFootballTeams, getAllTheTeams, getSingleTheTeams } from '../controllers/footballTeamInfo';
+
 import cors from "cors";
 import express from 'express';
-import { getAllTheTeams } from '../controllers/footballTeamInfo';
-import { getSingleTheTeams } from '../controllers/footballTeamInfo';
+// Middleware
+import { footBallTeam } from '../middleware/validatingAPI'
 
 // rest of the code remains same
 const app = express();
 
 
 app.use(cors());
-
-// Middleware
-// const middleware = require('../middleware/validatingApi');
 
 
 // Sample API testing
@@ -27,6 +26,10 @@ app.get('/teams', (req, res) => {
 
 app.get('/teams/:teamname', (req, res) => {
     getSingleTheTeams(req, res)
+})
+
+app.post('/teams', footBallTeam, (req, res) => {
+    createTheFootballTeams(req, res)
 })
 
 module.exports = app;   

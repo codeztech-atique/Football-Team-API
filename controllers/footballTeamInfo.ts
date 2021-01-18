@@ -1,7 +1,5 @@
 import mongoose = require("mongoose");
 
-import config from 'config';
-
 const chalk = require('chalk');
 
 require('../models/footballteamschema');
@@ -50,3 +48,49 @@ export function getSingleTheTeams(req: any, res: any) {
     }
   });
 }
+
+// Create or Update the football team data
+export function createTheFootballTeams(req: any, res: any) {
+  console.log(chalk.bgYellowBright("---------------- Create / Update FootballTeam ----------------"));
+  const teamName = req.body.name;
+  footballteam.findOne({name : teamName}, (err: any, teamInfo:any) => {
+    console.log(chalk.blue("---------------- Create FootballTeam ----------------"));
+    if (teamInfo!==null) {
+      teamInfo.img = req.body.img;
+      teamInfo.updatedDate = new Date();
+      var teamInfoSave = new footballteam(teamInfo);
+
+      teamInfoSave.save().then(dataInfo => {
+          res.send({
+            message: 'Team flag updated! !!',
+            status: 200,
+            data: dataInfo
+          })
+        }).catch(err => {
+          console.log('Err, User not found, Profile pic updated falied!');
+          res.send({
+            message: 'Team flag Updated failed!!!',
+            status: 400,
+            data: err
+          })
+      });
+    } else {
+      console.log(chalk.blue("---------------- Update FootballTeam ----------------"));
+      var footTeamCreated = new footballteam(req.body);
+      footTeamCreated.save().then(dataInfo => {
+        res.send({
+          message: 'Football Team Created !!',
+          status: 200,
+          data: dataInfo
+        })
+      }).catch(err => {
+          res.send({
+            message: 'Football team created failed!!',
+            status: 400,
+            err: err
+          });
+      })
+    }
+  });
+}
+
