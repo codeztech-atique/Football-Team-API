@@ -1,4 +1,4 @@
-service: Yougovfootballteam #Name of your App
+service: Yougovtask #Name of your App
 
 provider:
  name: aws
@@ -9,10 +9,24 @@ provider:
  #role: arn:aws:iam::005559960591:role/service-role/backend-role-ga0raqyi
  region: ap-south-1 # AWS region
 
+#package:
+  #exclude:
+  #  - '!node_modules/**'
+  #  - '!dist/**'
+  #  - '.git/**'
+  # individually: true
+
+package:
+  individually: true
+  
+
 functions:
- api:
-   handler: lambda.http
+  api:
+   handler: lambda.handler
    timeout: 2
    events:
-     - http: ANY {proxy+}
-     - http: ANY /
+    - http: ANY {proxy+}
+    - http: ANY /
+
+#getUsers:
+  # handler: src/userFile.handler

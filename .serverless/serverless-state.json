@@ -1,8 +1,8 @@
 {
   "service": {
-    "service": "Yougovfootballteam",
+    "service": "Yougovtask",
     "serviceObject": {
-      "name": "Yougovfootballteam"
+      "name": "Yougovtask"
     },
     "provider": {
       "stage": "production",
@@ -32,10 +32,10 @@
               }
             }
           },
-          "ApiLogGroup": {
+          "ApiwithhttpsLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/Yougovfootballteam-production-api"
+              "LogGroupName": "/aws/lambda/Yougovtask-production-apiwithhttps"
             }
           },
           "IamRoleLambdaExecution": {
@@ -64,7 +64,7 @@
                       "-",
                       [
                         "production",
-                        "Yougovfootballteam",
+                        "Yougovtask",
                         "lambda"
                       ]
                     ]
@@ -79,7 +79,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Yougovfootballteam-production-api:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Yougovtask-production-apiwithhttps:*"
                           }
                         ]
                       },
@@ -90,7 +90,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Yougovfootballteam-production-api:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Yougovtask-production-apiwithhttps:*:*"
                           }
                         ]
                       }
@@ -103,7 +103,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "Yougovfootballteam",
+                    "Yougovtask",
                     "production",
                     "ap-south-1",
                     "lambdaRole"
@@ -112,17 +112,17 @@
               }
             }
           },
-          "ApiLambdaFunction": {
+          "ApiwithhttpsLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/Yougovfootballteam/production/1610971604473-2021-01-18T12:06:44.473Z/Yougovfootballteam.zip"
+                "S3Key": "serverless/Yougovtask/production/1611040469217-2021-01-19T07:14:29.217Z/apiwithhttps.zip"
               },
-              "FunctionName": "Yougovfootballteam-production-api",
-              "Handler": "lambda.handler",
+              "FunctionName": "Yougovtask-production-apiwithhttps",
+              "Handler": "src/handler.apiwithhttps",
               "MemorySize": 512,
               "Role": {
                 "Fn::GetAtt": [
@@ -131,27 +131,27 @@
                 ]
               },
               "Runtime": "nodejs10.x",
-              "Timeout": 15
+              "Timeout": 2
             },
             "DependsOn": [
-              "ApiLogGroup",
+              "ApiwithhttpsLogGroup",
               "IamRoleLambdaExecution"
             ]
           },
-          "ApiLambdaVersiongRQ17wIhednAMHq4cryYe6PjMfRzEcNkacugLOOt0s": {
+          "ApiwithhttpsLambdaVersionpyTYA34DRP7Yy4JcwFFamkVA5wvSMCX60YBRIIJHM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "ApiLambdaFunction"
+                "Ref": "ApiwithhttpsLambdaFunction"
               },
-              "CodeSha256": "mXqVMhryUl5FZgZRcB95kzumk+Pvh6R84qfQXub5H8A="
+              "CodeSha256": "V/gnce8N3hSErsoGwGtd88L6ePuKInci1k67zB7qQRQ="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "production-Yougovfootballteam",
+              "Name": "production-Yougovtask",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -205,7 +205,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "ApiLambdaFunction",
+                          "ApiwithhttpsLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -251,7 +251,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "ApiLambdaFunction",
+                          "ApiwithhttpsLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -263,7 +263,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1610971575267": {
+          "ApiGatewayDeployment1611040438833": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -276,12 +276,12 @@
               "ApiGatewayMethodAny"
             ]
           },
-          "ApiLambdaPermissionApiGateway": {
+          "ApiwithhttpsLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "ApiLambdaFunction",
+                  "ApiwithhttpsLambdaFunction",
                   "Arn"
                 ]
               },
@@ -330,10 +330,10 @@
               "Ref": "ServerlessDeploymentBucket"
             }
           },
-          "ApiLambdaFunctionQualifiedArn": {
+          "ApiwithhttpsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersiongRQ17wIhednAMHq4cryYe6PjMfRzEcNkacugLOOt0s"
+              "Ref": "ApiwithhttpsLambdaVersionpyTYA34DRP7Yy4JcwFFamkVA5wvSMCX60YBRIIJHM"
             }
           },
           "ServiceEndpoint": {
@@ -388,8 +388,9 @@
     },
     "pluginsData": {},
     "functions": {
-      "api": {
-        "handler": "lambda.handler",
+      "apiwithhttps": {
+        "handler": "src/handler.apiwithhttps",
+        "timeout": 2,
         "events": [
           {
             "http": "ANY {proxy+}"
@@ -398,19 +399,20 @@
             "http": "ANY /"
           }
         ],
-        "name": "Yougovfootballteam-production-api",
-        "package": {},
+        "name": "Yougovtask-production-apiwithhttps",
+        "package": {
+          "artifact": "/Users/Atique/Desktop/Yougov/.serverless/apiwithhttps.zip"
+        },
         "memory": 512,
-        "timeout": 15,
         "runtime": "nodejs10.x",
         "vpc": {}
       }
     },
-    "layers": {},
-    "artifact": "/Users/Atique/Desktop/Yougov/.serverless/Yougovfootballteam.zip"
+    "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/Yougovfootballteam/production/1610971604473-2021-01-18T12:06:44.473Z",
-    "artifact": "Yougovfootballteam.zip"
+    "individually": true,
+    "artifactDirectoryName": "serverless/Yougovtask/production/1611040469217-2021-01-19T07:14:29.217Z",
+    "artifact": ""
   }
 }
