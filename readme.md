@@ -1,5 +1,19 @@
-npm install -g typescript
+#API_Documentation
 
-npm install -D @types/express @types/node nodemon ts-node typescript
+https://documenter.getpostman.com/view/2063706/TVza8D8j
 
-tsc --init
+#EntryPoint
+
+node local.ts
+
+Note -
+
+No need to run the application - Use this Endpoint - In order to get all the api details
+
+https://49b15o38rg.execute-api.ap-south-1.amazonaws.com/production
+
+Please visit the API documentation in order to see the API details
+
+#TestCase - 
+
+All the test case written inside the test folder. To run this 
