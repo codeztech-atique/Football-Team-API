@@ -8,7 +8,7 @@ node local.ts
 
 Note -
 
-No need to run the application - Use this Endpoint - In order to get all the api details
+No need to run the application - Use this Endpoint from Postman - In order to check the API response
 
 https://49b15o38rg.execute-api.ap-south-1.amazonaws.com/production
 
