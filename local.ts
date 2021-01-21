@@ -1,6 +1,6 @@
 import config from 'config';
 // import {configureApp} from './index';
-const app = require('./index');
+const app = require('./index.ts');
 
 const chalk = require('chalk');
 // const app = require('./index');

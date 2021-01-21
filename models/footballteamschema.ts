@@ -10,4 +10,4 @@ var footballTeamSchema = new mongoose.Schema({
 });
 
 var footballteam = mongoose.model('footballteam', footballTeamSchema);
-module.exports = footballteam;
+export = footballteam;

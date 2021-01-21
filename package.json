@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "npm install -g typescript",
   "main": "local.ts",
+  "type": "module",
   "scripts": {
-    "start": "nodemon local.ts",
+    "start": "ts-node local.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

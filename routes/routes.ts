@@ -32,4 +32,5 @@ app.post('/teams', footBallTeam, (req, res) => {
     createTheFootballTeams(req, res)
 })
 
-module.exports = app;   
+export = app;
+// module.exports = app;   

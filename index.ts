@@ -1,7 +1,8 @@
+import * as AWS from 'aws-sdk';
+import * as bodyParser from 'body-parser';
+
 import cors from "cors";
-import { eventContext } from 'aws-serverless-express/middleware';
 import express from 'express';
-const bodyParser = require('body-parser')
 const mongoose = require('./db.ts');
 
 
@@ -10,7 +11,7 @@ const mongoose = require('./db.ts');
   app.use(cors())
   // app.use(eventContext());
 
-  app.use(bodyParser.json({limit: '5mb', extended: true}))
+  app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({limit: '5mb', extended: true}))
 
   const apiRoutes = require('./routes/routes');

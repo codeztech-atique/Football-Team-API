@@ -9,7 +9,7 @@
       "region": "ap-south-1",
       "variableSyntax": "\\${([ ~:a-zA-Z0-9._@'\",\\-\\/\\(\\)*]+?)}",
       "name": "aws",
-      "runtime": "nodejs10.x",
+      "runtime": "nodejs12.x",
       "memorySize": 512,
       "timeout": 15,
       "versionFunctions": true,
@@ -32,10 +32,10 @@
               }
             }
           },
-          "ApiwithhttpsLogGroup": {
+          "ApiLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/Yougovtask-production-apiwithhttps"
+              "LogGroupName": "/aws/lambda/Yougovtask-production-api"
             }
           },
           "IamRoleLambdaExecution": {
@@ -79,7 +79,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Yougovtask-production-apiwithhttps:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Yougovtask-production-api:*"
                           }
                         ]
                       },
@@ -90,7 +90,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Yougovtask-production-apiwithhttps:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Yougovtask-production-api:*:*"
                           }
                         ]
                       }
@@ -112,17 +112,17 @@
               }
             }
           },
-          "ApiwithhttpsLambdaFunction": {
+          "ApiLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/Yougovtask/production/1611040469217-2021-01-19T07:14:29.217Z/apiwithhttps.zip"
+                "S3Key": "serverless/Yougovtask/production/1611211891268-2021-01-21T06:51:31.268Z/api.zip"
               },
-              "FunctionName": "Yougovtask-production-apiwithhttps",
-              "Handler": "src/handler.apiwithhttps",
+              "FunctionName": "Yougovtask-production-api",
+              "Handler": "lambda.handler",
               "MemorySize": 512,
               "Role": {
                 "Fn::GetAtt": [
@@ -130,22 +130,22 @@
                   "Arn"
                 ]
               },
-              "Runtime": "nodejs10.x",
+              "Runtime": "nodejs12.x",
               "Timeout": 2
             },
             "DependsOn": [
-              "ApiwithhttpsLogGroup",
+              "ApiLogGroup",
               "IamRoleLambdaExecution"
             ]
           },
-          "ApiwithhttpsLambdaVersionpyTYA34DRP7Yy4JcwFFamkVA5wvSMCX60YBRIIJHM": {
+          "ApiLambdaVersionVoPbuqqcb2yOtWPgS3xhMSEzhoxvOsXyDCjVfNip8M": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "ApiwithhttpsLambdaFunction"
+                "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "V/gnce8N3hSErsoGwGtd88L6ePuKInci1k67zB7qQRQ="
+              "CodeSha256": "kF/LjqL9Zx6x4FzqIlpEE4jW4+u2WRJvl8Zqa+InLLU="
             }
           },
           "ApiGatewayRestApi": {
@@ -205,7 +205,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "ApiwithhttpsLambdaFunction",
+                          "ApiLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -251,7 +251,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "ApiwithhttpsLambdaFunction",
+                          "ApiLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -263,7 +263,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1611040438833": {
+          "ApiGatewayDeployment1611211858104": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -276,12 +276,12 @@
               "ApiGatewayMethodAny"
             ]
           },
-          "ApiwithhttpsLambdaPermissionApiGateway": {
+          "ApiLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "ApiwithhttpsLambdaFunction",
+                  "ApiLambdaFunction",
                   "Arn"
                 ]
               },
@@ -330,10 +330,10 @@
               "Ref": "ServerlessDeploymentBucket"
             }
           },
-          "ApiwithhttpsLambdaFunctionQualifiedArn": {
+          "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiwithhttpsLambdaVersionpyTYA34DRP7Yy4JcwFFamkVA5wvSMCX60YBRIIJHM"
+              "Ref": "ApiLambdaVersionVoPbuqqcb2yOtWPgS3xhMSEzhoxvOsXyDCjVfNip8M"
             }
           },
           "ServiceEndpoint": {
@@ -388,8 +388,8 @@
     },
     "pluginsData": {},
     "functions": {
-      "apiwithhttps": {
-        "handler": "src/handler.apiwithhttps",
+      "api": {
+        "handler": "lambda.handler",
         "timeout": 2,
         "events": [
           {
@@ -399,12 +399,12 @@
             "http": "ANY /"
           }
         ],
-        "name": "Yougovtask-production-apiwithhttps",
+        "name": "Yougovtask-production-api",
         "package": {
-          "artifact": "/Users/Atique/Desktop/Yougov/.serverless/apiwithhttps.zip"
+          "artifact": "/Users/Atique/Desktop/Yougov/.serverless/api.zip"
         },
         "memory": 512,
-        "runtime": "nodejs10.x",
+        "runtime": "nodejs12.x",
         "vpc": {}
       }
     },
@@ -412,7 +412,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/Yougovtask/production/1611040469217-2021-01-19T07:14:29.217Z",
+    "artifactDirectoryName": "serverless/Yougovtask/production/1611211891268-2021-01-21T06:51:31.268Z",
     "artifact": ""
   }
 }
