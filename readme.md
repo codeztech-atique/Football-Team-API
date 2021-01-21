@@ -16,4 +16,17 @@ Please visit the API documentation in order to see the API details
 
 #TestCase - 
 
-All the test case written inside the test folder. To run this 
+All the test case written inside the test folder. To run this go to the test folder - 
+
+npm test
+
+--> It will run 4 test cases -
+
+1) Check the App working fine or not !!!
+
+2) Get All the football Team Data Expect result check GET /teams
+
+3) Filter the FootBall team based on the team name. GET /teams/{teamName}
+
+4) Create or update the team flag if the team exists. POST /teams
+
