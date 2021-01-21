@@ -54,7 +54,7 @@ export function createTheFootballTeams(req: any, res: any) {
   console.log(chalk.bgYellowBright("---------------- Create / Update FootballTeam ----------------"));
   const teamName = req.body.name;
   footballteam.findOne({name : teamName}, (err: any, teamInfo:any) => {
-    console.log(chalk.blue("---------------- Create FootballTeam ----------------"));
+    console.log(chalk.blue("---------------- Create / Update FootballTeam ----------------"));
     if (teamInfo!==null) {
       teamInfo.img = req.body.img;
       teamInfo.updatedDate = new Date();

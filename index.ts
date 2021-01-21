@@ -1,8 +1,8 @@
-import * as AWS from 'aws-sdk';
 import * as bodyParser from 'body-parser';
 
 import cors from "cors";
 import express from 'express';
+
 const mongoose = require('./db.ts');
 
 
